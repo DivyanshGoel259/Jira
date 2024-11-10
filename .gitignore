@@ -1,0 +1,4 @@
+
+node_modules
+.env
+network.ts
