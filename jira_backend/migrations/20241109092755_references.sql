@@ -27,6 +27,9 @@ FOREIGN KEY (reporter_id)
 REFERENCES users(id);
 
 
+
+
+
 -- migrate:down
 
 
@@ -44,4 +47,6 @@ DROP CONSTRAINT project_id_fkey;
 
 ALTER TABLE sprint
 DROP CONSTRAINT project_id_fkey;
+
+
 

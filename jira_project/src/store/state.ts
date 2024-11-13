@@ -2,13 +2,14 @@ import { UserType } from "../types";
 import createNewStore from "../zustand";
 
 interface userStateType {
-  userData:UserType|null
+  user:UserType|null
 }
 
 const initialState:userStateType = {
-  userData:null
+  user:null,
 }
 export const userState = createNewStore(initialState,{
   name:"global",
-  devTools:true
+  devTools:true,
+  persist:true
 })

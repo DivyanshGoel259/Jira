@@ -2,9 +2,10 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "./ui/button"
 import { UserMenu } from "./UserMenu"
-import { checkUser } from "../pages/auth/CheckUser"
+import { userState } from "../store/state"
 export const Header =() => {
     const navigate = useNavigate()
+    const {user}= userState()
     const handleClick = () => { navigate("/sign-in") }
     return <div className="p-4">
         <div className="flex justify-between">
@@ -22,14 +23,8 @@ export const Header =() => {
                     </Button>
                 </div>
                 <div className="flex justify-center flex-col">
-
-
-                    <SignedOut >
-                        <Button  variant={"outline"} onClick={handleClick}>Signin</Button>
-                    </SignedOut>
-                    <SignedIn>
-                        <UserMenu />
-                    </SignedIn>
+                    {user?<UserMenu />:<Button  variant={"outline"} onClick={handleClick}>Signin</Button>}                       
+                    
                 </div>
             </div>
         </div>

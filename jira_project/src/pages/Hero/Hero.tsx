@@ -7,11 +7,11 @@ import { HeroCarousel } from "./components/Carousel"
 import { HeroFaqs } from "./components/Faq's"
 import { HeroSection } from "./components/HeroSection"
 import { KeyFeatures } from "./components/KeyFeatures"
-import { checkUser } from "../auth/CheckUser"
+// import { checkUser } from "../auth/CheckUser"
 
 
 export const Hero = () => {
-    checkUser()
+    // checkUser()
     const navigate = useNavigate()
    const CallToActionProps = {
         title:"Ready to Transform Your Workflow",

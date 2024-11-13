@@ -5,7 +5,7 @@ create table project (
     name varchar(255) not null,
     key text not null,
     description text ,
-    organization_id text not null,
+    organization_id uuid not null,
     created_at timestamp without time zone default now(),
     updated_at timestamp without time zone default now() 
 

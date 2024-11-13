@@ -1,14 +1,14 @@
 
-import { UserButton } from "@clerk/clerk-react"
 import { ChartIcon } from "../assets/Icons"
+import { userState } from "../store/state"
+import { Avatar,AvatarImage,AvatarFallback } from "./ui/avatar"
 
 export const UserMenu = () => {
+    const {user} = userState()
     return <div className="flex justify-center flex-col">
-        <UserButton appearance={{ elements: { avatarBox: "w-10 h-10" } }}>
-            <UserButton.MenuItems>
-                <UserButton.Link href="/onboarding" label="My Organizations" labelIcon={<ChartIcon />} />
-                <UserButton.Action label="manageAccount" />
-            </UserButton.MenuItems>
-        </UserButton>
+        <Avatar>
+        <AvatarImage src={user?.image_url} />
+        <AvatarFallback>{user?.name[0]}</AvatarFallback>
+        </Avatar>
     </div>
 }
