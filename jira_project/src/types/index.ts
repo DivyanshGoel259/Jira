@@ -23,3 +23,12 @@ const createOrganizationType = z.object({
 export type createOrganizationType = z.infer<typeof createOrganizationType>
 
 export type SignInInputType = z.infer<typeof signInInputsType>    
+
+export interface CreateOrganizationType {
+    id :string,
+    name :string,
+    slug :string,
+    logo_url :string,
+    created_at :string,
+    updated_at :string
+}

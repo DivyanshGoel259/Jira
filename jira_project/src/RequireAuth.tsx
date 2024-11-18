@@ -1,10 +1,10 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { userState } from "./store/state";
+import { globalState } from "./store/state";
 import useReducerPlus from "./hooks/useReducerPlus";
 
 export const RequireAuth = ({ children }: { children: ReactElement }) => {
-    const { user } = userState();
+    const { user } = globalState();
     const navigate = useNavigate();
     const [state,update] = useReducerPlus({isLoading:true})
 

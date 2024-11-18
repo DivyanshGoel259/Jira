@@ -6,22 +6,23 @@ import { Heading } from "../components/Heading";
 import { SubHeading } from "../components/SubHeading";
 import { signIn } from "./api";
 import { gLoginReq } from "../gLoginApi";
-import { userState } from "../../../store/state";
+import { globalState } from "../../../store/state";
 import { useNavigate } from "react-router-dom";
 import useReducerPlus from "../../../hooks/useReducerPlus";
 import useGoogleAuth from "../../../hooks/useGoogleAuth";
 import { GoogleIcon } from "../../../assets/Icons";
+import toast from "react-hot-toast";
 
 export const Signin = () => {
   const navigate = useNavigate();
-  const { set, user } = userState();
+  const { set, user } = globalState();
   const [state, update] = useReducerPlus({
     isLoading: false,
     error: "",
     email: "",
     password: "",
   });
-  const { glogin, user: gUser } = useGoogleAuth();
+  const { glogin, guser } = useGoogleAuth();
   useEffect(() => {
     if (user) {
       navigate("/onboarding");
@@ -29,10 +30,10 @@ export const Signin = () => {
   }, [user]);
   
   useEffect(()=>{
-    if (gUser) {
+    if (guser) {
         createGuser()        
       }
-  },[gUser])
+  },[guser])
   
 
   const handleClick = async () => {
@@ -48,7 +49,7 @@ export const Signin = () => {
         error: err.message,
         isLoading: false,
       });
-      alert(err.message);
+      toast.error(err.message);
       return;
     }
     update({
@@ -61,10 +62,10 @@ export const Signin = () => {
 
   
    const createGuser = async () => {
-    if(!gUser){
+    if(!guser){
         return
     }
-    const accessToken = gUser.accessToken
+    const accessToken = guser.accessToken
     
     update({
       isLoading: true,
@@ -75,7 +76,7 @@ export const Signin = () => {
         error: err.message,
         isLoading: false,
       });
-      alert(err.message);
+      toast.error(err.message);
       return;
     }
     update({

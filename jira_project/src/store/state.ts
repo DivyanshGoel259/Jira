@@ -1,14 +1,28 @@
 import { UserType } from "../types";
 import createNewStore from "../zustand";
 
-interface userStateType {
-  user:UserType|null
+export interface organization{
+  id?:string,
+  name:string,
+  slug?:string,  
+  logo_url:URL,
+  role?:string
 }
 
-const initialState:userStateType = {
-  user:null,
+interface GlobalStateType {
+  user:UserType|null,
+  organization:{
+    all:organization[],
+    selected:organization
+  }|null
 }
-export const userState = createNewStore(initialState,{
+
+const initialState:GlobalStateType = {
+  user:null,
+  organization:null
+
+}
+export const globalState = createNewStore(initialState,{
   name:"global",
   devTools:true,
   persist:true

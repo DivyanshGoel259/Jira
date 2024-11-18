@@ -5,15 +5,16 @@ import { Label } from "../../../components/ui/label"
 import { Heading } from "../components/Heading"
 import { SubHeading } from "../components/SubHeading"
 import { signup } from "./api"
-import { userState } from "../../../store/state"
+import { globalState } from "../../../store/state"
 import { useNavigate } from "react-router-dom"
 import useReducerPlus from "../../../hooks/useReducerPlus"
 import { GoogleIcon } from "../../../assets/Icons"
+import toast from "react-hot-toast"
 
 
 export const Signup = () => {
     const navigate = useNavigate()
-    const { set, user } = userState()
+    const { set, user } = globalState()
     const [state, update] = useReducerPlus({
         isLoading: false,
         error: "",
@@ -38,7 +39,7 @@ export const Signup = () => {
                 error: err.message,
                 isLoading: false
             })
-            alert(err.message)
+            toast.error(err.message)
             return
         }
         update({

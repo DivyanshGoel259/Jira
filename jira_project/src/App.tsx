@@ -6,6 +6,7 @@ import { Header } from './components/Header'
 import { RequireAuth } from './RequireAuth'
 import { OnBoarding } from './pages/onboarding/OnBoarding'
 import { NotFoundPage } from './pages/Error/404Page'
+import { Organization } from './pages/organization/Organization'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/sign-up' element={<Signup />} />
           <Route path='/sign-in' element={<Signin />} /> 
           <Route path='/onboarding' element={<RequireAuth><OnBoarding/></RequireAuth>} />
+          <Route path='/organization/:orgId' element={<RequireAuth><Organization/></RequireAuth>} />
           <Route path='*' element={<NotFoundPage/>} /> 
 
         </Routes>
