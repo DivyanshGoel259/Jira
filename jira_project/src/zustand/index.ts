@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 export function isObject(item: any) {
-  return item && typeof item === 'object' && !Array.isArray(item);
+  return item && typeof item === "object" && !Array.isArray(item);
 }
 
 export function deepmerge<T>(target: any, ...sources: any): T {
@@ -86,10 +86,10 @@ export default function createNewStore<S>(
   if (options) {
     if (options.persist) {
       const persistOptions = {
-        name: '',
+        name: "",
         version: 1,
       };
-      if (typeof options.persist == 'boolean') {
+      if (typeof options.persist == "boolean") {
         persistOptions.name = options.name;
       } else {
         persistOptions.name = options.persist.name;

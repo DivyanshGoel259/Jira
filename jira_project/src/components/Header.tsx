@@ -3,8 +3,8 @@ import { Button } from "./ui/button";
 import { UserMenu } from "./UserMenu";
 import { globalState } from "../store/state";
 import { CreateProjectModal } from "./createProjectModal";
-import toast from "react-hot-toast"
-import logo from '../assets/logo2.png'
+import toast from "react-hot-toast";
+import logo from "../assets/logo2.png";
 export const Header = () => {
   const navigate = useNavigate();
   const { user, organization } = globalState();
@@ -12,14 +12,14 @@ export const Header = () => {
     navigate("/sign-in");
   };
   const handleClick = () => {
-    if(!user){
-      toast.error("Please Login")
-      navigate("/sign-in")
-      return
+    if (!user) {
+      toast.error("Please Login");
+      navigate("/sign-in");
+      return;
     }
     if (!organization?.selected) {
-      toast.error("No Organization selected")
-      return
+      toast.error("No Organization selected");
+      return;
     }
   };
   return (
@@ -32,8 +32,9 @@ export const Header = () => {
           <div className="flex justify-center flex-col">
             {user &&
             organization?.selected &&
-            organization?.selected.role == "admin" ?
-              <CreateProjectModal /> : (
+            organization?.selected.role == "admin" ? (
+              <CreateProjectModal />
+            ) : (
               <Button onClick={handleClick} variant="destructive">
                 Create Project
               </Button>

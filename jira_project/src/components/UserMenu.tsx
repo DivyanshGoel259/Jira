@@ -11,8 +11,8 @@ import {
 } from "./ui/dropdown-menu";
 
 export const UserMenu = () => {
-  const navigate = useNavigate()
-  const {reset, user } = globalState();
+  const navigate = useNavigate();
+  const { reset, user } = globalState();
   return (
     <div className="flex justify-center flex-col">
       <DropdownMenu>
@@ -25,14 +25,22 @@ export const UserMenu = () => {
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={()=>{
-            reset()
-            localStorage.removeItem("token")
-          }}>Logout</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              reset();
+              localStorage.removeItem("token");
+            }}
+          >
+            Logout
+          </DropdownMenuItem>
           <DropdownMenuLabel>Organizations</DropdownMenuLabel>
-          <DropdownMenuItem onClick={()=>{
-            navigate("/onboarding")
-          }}>My Organizations</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              navigate("/onboarding");
+            }}
+          >
+            My Organizations
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

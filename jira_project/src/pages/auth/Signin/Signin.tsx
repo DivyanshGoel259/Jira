@@ -28,13 +28,12 @@ export const Signin = () => {
       navigate("/onboarding");
     }
   }, [user]);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     if (guser) {
-        createGuser()        
-      }
-  },[guser])
-  
+      createGuser();
+    }
+  }, [guser]);
 
   const handleClick = async () => {
     update({
@@ -60,13 +59,12 @@ export const Signin = () => {
     });
   };
 
-  
-   const createGuser = async () => {
-    if(!guser){
-        return
+  const createGuser = async () => {
+    if (!guser) {
+      return;
     }
-    const accessToken = guser.accessToken
-    
+    const accessToken = guser.accessToken;
+
     update({
       isLoading: true,
     });

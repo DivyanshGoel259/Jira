@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import useReducerPlus from "../../../hooks/useReducerPlus";
 import { globalState } from "../../../store/state";
-import { getProjects } from "../api";
+import { deleteProject, getProjects } from "../api";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Button } from "../../../components/ui/button";
 
 export const ProjectCard = () => {
   const { organization } = globalState();
@@ -13,6 +12,28 @@ export const ProjectCard = () => {
     projects: [],
     orgId: organization?.selected?.id,
   });
+
+  const handleDeleteProject = async (projectId: string) => {
+    try {
+      if (organization?.selected.role !== "admin") {
+        throw new Error("Only Admin can Delete Project");
+      }
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this project"
+      );
+      if (isConfirmed) {
+        const [_, err] = await deleteProject(projectId);
+        if (err) {
+          throw err;
+        }
+        toast.success("Project deleted successfully");
+        getAllProjects();
+      }
+      return;
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+  };
   const getAllProjects = async () => {
     update({ isLoading: true });
     try {
@@ -32,8 +53,8 @@ export const ProjectCard = () => {
   return (
     <div className="mt-8">
       {state.projects.length === 0 ? (
-        <div >There are no projects. Create a new one to get started.</div>
-      ) :(
+        <div>There are no projects. Create a new one to get started.</div>
+      ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {state.projects.map((project: any) => (
             <div
@@ -41,7 +62,12 @@ export const ProjectCard = () => {
               className="relative bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
             >
               {/* Delete Icon */}
-              <button className="absolute top-3 right-3 text-gray-400 hover:text-red-500 transition-colors">
+              <button
+                onClick={() => {
+                  handleDeleteProject(project.id);
+                }}
+                className="absolute top-3 right-3 text-gray-400 hover:text-red-500 transition-colors"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
