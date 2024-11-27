@@ -42,15 +42,36 @@ export enum SprintStatus {
 }
 
 export enum IssueStatus {
-  TODO,
-  IN_PROGRESS,
-  IN_REVIEW,
-  DONE,
+  TODO = "TODO",
+  IN_PROGRESS = "IN_PROGRESS",
+  IN_REVIEW = "IN_REVIEW",
+  DONE = "DONE",
 }
 
 export enum IssuePriority {
-  LOW,
-  MEDIUM,
-  HIGH,
-  URGENT,
+  LOW = "LOW",
+  MEDIUM = "MEDIUM",
+  HIGH = "HIGH",
+  URGENT = "URGENT",
+}
+
+export interface GetIssue {
+  id?: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+  description: string;
+  status: IssueStatus;
+  order?: number;
+  priority: IssuePriority;
+  asignee_id: string;
+  reporter_id?: string;
+  project_id: string;
+  sprint_id: string;
+  asignee_name?: string;
+  reporter_name?: string;
+  asignee_email?: string;
+  reporter_email?: string;
+  asignee_imageUrl?: string;
+  reporter_imageUrl?: string;
 }

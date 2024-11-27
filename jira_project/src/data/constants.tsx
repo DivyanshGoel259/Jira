@@ -96,3 +96,23 @@ export const Faqs = [
       "While ZCRUM is packed with features, we've designed it with user-friendliness in mind. New users can quickly get up to speed thanks to our intuitive interface, helpful onboarding process, and comprehensive documentation.",
   },
 ];
+
+
+export const status = [
+  {
+    "name": "Todo",
+    "key": "TODO"
+  },
+  {
+    "name": "In Progress",
+    "key": "IN_PROGRESS"
+  },
+  {
+    "name": "In Review",
+    "key": "IN_REVIEW"
+  },
+  {
+    "name": "Done",
+    "key": "DONE"
+  }
+]

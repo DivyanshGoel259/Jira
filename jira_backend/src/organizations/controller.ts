@@ -36,3 +36,14 @@ export const getAllOrganizationForUser = async (
     return res.json({ error: { message: errorMessage } });
   }
 };
+
+export const getOrganizationMembers = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).userId;
+    const data = await service.getOrganizationMembers(userId);
+    return res.json({ data });
+  } catch (err: any) {
+    const errorMessage = err.message || "Error getting Organization Members";
+    return res.json({ error: { message: errorMessage } });
+  }
+};

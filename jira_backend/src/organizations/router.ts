@@ -6,5 +6,6 @@ router.use(authMiddleware);
 router.post("/", controller.createOrganization);
 router.get("/:orgId", controller.getOrganization);
 router.get("/user/all", controller.getAllOrganizationForUser);
+router.get("/org/all", controller.getOrganizationMembers);
 
 export default router;

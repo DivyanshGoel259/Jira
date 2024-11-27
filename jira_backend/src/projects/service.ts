@@ -1,10 +1,14 @@
 import db from "../libs/utils";
 import { Roles } from "../types";
 
-export const createProject = async (payload: any) => {
+export const createProject = async (payload: any, userId: string) => {
   try {
-    if (payload.role != Roles.ADMIN) {
-      throw new Error("UnAuthorized");
+    const orgMember = await db.oneOrNone(
+      `SELECT role FROM organization_member WHERE member_id = $(userId)`,
+      { userId }
+    );
+    if (orgMember.role != Roles.ADMIN) {
+      throw new Error("Only Admins can Create Project");
     }
     const newProject = await db.oneOrNone(
       `INSERT INTO project(name,key,description,organization_id) VALUES($(name),$(key),$(description),$(orgId))`,
@@ -28,13 +32,32 @@ export const getAllProjects = async (orgId: string) => {
   }
 };
 
-export const deleteProject = async (id: string) => {
+export const deleteProject = async (projectId :string , userId: string) => {
   try {
+    const orgMember = await db.oneOrNone(
+      `SELECT role FROM organization_member WHERE member_id = $(userId)`,
+      { userId }
+    );
+    if (orgMember.role != Roles.ADMIN) {
+      throw new Error("Only Admins can Create Project");
+    }
     const deletedProjectId = await db.oneOrNone(
-      `DELETE FROM project WHERE id = $(id) RETURNING id`,
-      { id }
+      `DELETE FROM project WHERE id = $(projectId) RETURNING id`,
+      {projectId}
     );
     return deletedProjectId;
+  } catch (err: any) {
+    throw err;
+  }
+};
+
+export const getProject = async (id: string) => {
+  try {
+    const project = await db.oneOrNone(
+      `SELECT id,name,key FROM project WHERE id = $(id)`,
+      { id }
+    );
+    return project;
   } catch (err: any) {
     throw err;
   }

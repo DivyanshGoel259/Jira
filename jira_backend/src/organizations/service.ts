@@ -56,3 +56,24 @@ export const getAllOrganizationForUser = async (userId: string) => {
     throw err;
   }
 };
+
+export const getOrganizationMembers = async (userId: string) => {
+  try {
+    const isOrgMember = await db.oneOrNone(
+      `SELECT * FROM organization_member WHERE member_id = $1`,
+      userId
+    );
+    const orgMembersUserId = await db.manyOrNone(
+      `SELECT member_id FROM organization_member WHERE organization_id = $(organization_id)`,
+      isOrgMember
+    );
+    const users = await db.manyOrNone(
+      `SELECT * FROM users WHERE id IN ($(memberIds:csv))`,
+      { memberIds: orgMembersUserId.map((member) => member.member_id) }
+    );
+    return users;
+  } catch (err: any) {
+    console.log(err);
+    throw err;
+  }
+};

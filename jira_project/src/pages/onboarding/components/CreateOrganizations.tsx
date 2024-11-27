@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { globalState } from "../../../store/state";
 import toast from "react-hot-toast";
+import BarLoader from "../../../components/barLoader";
 
 export const CreateOrganizations = () => {
   const [state, update] = useReducerPlus({
@@ -91,21 +92,24 @@ export const CreateOrganizations = () => {
   };
 
   return (
-    <div className="w-[20rem] overflow-hidden border border-gray-800 bg-[#101825] rounded-[18px] ">
-      <div className="py-8">
-        <div className="text-xl font-bold text-center">
-          {state.iscreating ? "Create Organization" : "Choose an Organization"}
-        </div>
-        {state.iscreating ? (
-          <div></div>
-        ) : (
-          <div className="text-center text-md text-gray-400">
-            to continue to zcrum
+    <div>
+      <div className="w-[20rem] overflow-hidden border border-gray-800 bg-[#101825] rounded-[18px] ">
+        <div className="py-8">
+          <div className="text-xl font-bold text-center">
+            {state.iscreating
+              ? "Create Organization"
+              : "Choose an Organization"}
           </div>
-        )}
-      </div>
+          {state.iscreating ? (
+            <div></div>
+          ) : (
+            <div className="text-center text-md text-gray-400">
+              to continue to zcrum
+            </div>
+          )}
+        </div>
 
-      <div>
+        <div></div>
         {state.iscreating ? (
           <div>
             <div className="p-4">

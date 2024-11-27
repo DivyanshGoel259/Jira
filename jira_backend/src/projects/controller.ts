@@ -6,7 +6,8 @@ export const createProject = async (
   next: NextFunction
 ) => {
   try {
-    const data = await service.createProject(req.body);
+    const userId = (req as any).userId
+    const data = await service.createProject(req.body,userId);
     return res.json({ data });
   } catch (err: any) {
     next(err);
@@ -33,8 +34,24 @@ export const deleteProject = async (
   next: NextFunction
 ) => {
   try {
+    const userId = (req as any).userId
+    const projectId = req.params.id
+    const data = await service.deleteProject(projectId,userId);
+    return res.json({ data });
+  } catch (err: any) {
+    next(err);
+  }
+};
+
+
+export const getProject = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
     const id = req.params.id;
-    const data = await service.deleteProject(id);
+    const data = await service.getProject(id);
     return res.json({ data });
   } catch (err: any) {
     next(err);

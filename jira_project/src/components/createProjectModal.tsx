@@ -24,7 +24,6 @@ export function CreateProjectModal() {
       description: "",
       key: "",
       orgId: organization?.selected?.id,
-      role: organization?.selected?.role,
     },
     isLoading: false,
   });

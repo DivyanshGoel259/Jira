@@ -7,6 +7,7 @@ import { RequireAuth } from "./RequireAuth";
 import { OnBoarding } from "./pages/onboarding/OnBoarding";
 import { NotFoundPage } from "./pages/Error/404Page";
 import { Organization } from "./pages/organization/Organization";
+import { Project } from "./pages/project/Project";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
             element={
               <RequireAuth>
                 <Organization />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/organization/projects/:projectId"
+            element={
+              <RequireAuth>
+                <Project />
               </RequireAuth>
             }
           />

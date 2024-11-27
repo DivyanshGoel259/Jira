@@ -2,6 +2,7 @@ import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { globalState } from "./store/state";
 import useReducerPlus from "./hooks/useReducerPlus";
+import BarLoader from "./components/barLoader";
 
 export const RequireAuth = ({ children }: { children: ReactElement }) => {
   const { user } = globalState();
@@ -18,7 +19,7 @@ export const RequireAuth = ({ children }: { children: ReactElement }) => {
   }, [user, navigate]);
 
   if (state.isLoading) {
-    return <div>Loading...</div>;
+    return <div><BarLoader/></div>;
   }
   return children;
 };

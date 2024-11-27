@@ -18,7 +18,7 @@ export const getProjects = async (orgId: string) => {
     if (!token) {
       throw new Error("Token not Found");
     }
-    const data = await get(`${BACKEND_URL}/api/v1/project/${orgId}`, {
+    const data = await get(`${BACKEND_URL}/api/v1/project/bulk/${orgId}`, {
       headers: { Authorization: token },
     });
     return [data, null] as [any, null];
